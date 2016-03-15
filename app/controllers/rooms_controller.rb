@@ -26,9 +26,17 @@ class RoomsController < ApplicationController
      @room.update_attributes(room_params)
     if @room.save
       redirect_to rooms_path
+      flash[:success]= 'Actualizado correctamente'
+
     else
       render :edit
     end
+  end
+
+  def destroy
+    Room.find(params[:id]).destroy
+    redirect_to rooms_path
+    flash[:success]= 'Registro eliminado correctamente'
   end
 
   protected
