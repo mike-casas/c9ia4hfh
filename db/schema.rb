@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315000639) do
+ActiveRecord::Schema.define(version: 20160315202240) do
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.date     "released_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "artist_id"
+  end
+
+  add_index "albums", ["artist_id"], name: "index_albums_on_artist_id"
+
+  create_table "artists", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string   "title"
@@ -23,5 +41,16 @@ ActiveRecord::Schema.define(version: 20160315000639) do
     t.string   "image_url"
     t.decimal  "price_per_night"
   end
+
+  create_table "songs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "preview_url"
+    t.string   "number"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "album_id"
+  end
+
+  add_index "songs", ["album_id"], name: "index_songs_on_album_id"
 
 end
